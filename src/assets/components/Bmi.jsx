@@ -7,18 +7,19 @@ const Bmi = () => {
   const [score, setScore] = useState();
   const [message, setMessage] = useState();
 
-  const result = () => {
+  const result = (e) => {
+    e.preventDefault();
+
     if (weight === 0 || height === 0) {
       alert("Plese provide your information");
     }
-    const height1 = height / 39.37;
-    const height2 = height / 39.37;
-    const result = (weight / (height1 * height2)).toFixed(2);
+    const updatedHeight = height / 39.37;
+    const result = (weight / (updatedHeight * updatedHeight)).toFixed(2);
     setScore(result);
 
-    if (score < 25) {
+    if (result < 25) {
       setMessage("You are underweight! Please take care of your health.");
-    } else if (score >= 25 && score < 30) {
+    } else if (result >= 25 && result < 30) {
       setMessage("You are healthy");
     } else {
       setMessage("You are overweight! Please take care of your health.");
@@ -45,7 +46,6 @@ const Bmi = () => {
             onChange={(e) => setWeight(e.target.value)}
           />
         </div>
-
         <div className="height">
           <level>Height(inch)</level>
           <input
@@ -64,7 +64,7 @@ const Bmi = () => {
       </button>
       <div>
         <p>Your BMI score is: {score} </p>
-        <p> {message}</p>
+        <p> your score is {score} {message}</p>
       </div>
     </div>
   );
